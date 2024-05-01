@@ -1,40 +1,27 @@
 package com.api.dimdim.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.api.dimdim.models.Usuario;
-import com.api.dimdim.models.dtos.DadosCadastroUsuario;
 
-import jakarta.validation.Valid;
+import com.api.dimdim.models.PfUser;
+import com.api.dimdim.repository.PfUserRepository;
 
 @RequestMapping("/user")
 @RestController
 public class UserController {
+@Autowired
+private PfUserRepository repositoryUser;
 
-
-List<Usuario> usuarios = new ArrayList<>();    
-
-
-
-@PostMapping
-public ResponseEntity createUser(@RequestBody @Valid DadosCadastroUsuario data) {
-    Usuario usuario = new Usuario(data); 
-    usuarios.add(usuario);
-    return ResponseEntity.ok().build();
+@GetMapping("/findAll")
+public ResponseEntity<List<PfUser>> getAllUsers() {
+    List<PfUser> users = repositoryUser.findAllInSchema();
+    return ResponseEntity.ok(users);
 }
-
-@GetMapping
-public ResponseEntity<List<Usuario>> getAllUsers() {
-    return ResponseEntity.ok(usuarios);
-}
-
 
 }
