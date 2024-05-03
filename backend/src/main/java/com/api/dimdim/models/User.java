@@ -2,7 +2,7 @@
 
     import java.sql.Date;
 
-    import com.api.dimdim.models.dtos.DadosCadastroUsuario;
+
 
     import jakarta.persistence.Column;
     import jakarta.persistence.Entity;
@@ -17,26 +17,28 @@
     @Getter
     @Setter
     @Entity
-    @Table(name = "pf_user")
+    @Table(name = "users")
     public class User {
         
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
         private long id; 
-        @Column(name = "name")
+        @Column(name = "name", nullable = false)
         private String nome;
-        @Column(name = "cpf")
+        @Column(name = "cpf", nullable = false)
         private String cpf;
-        @Column(name = "genero")
+        @Column(name = "genero", nullable = false)
         private String genero;
-        @Column(name = "data_nascimento")
+        @Column(name = "data_nascimento", nullable = false)
         private Date dataNascimento;
-        @Column(name = "id_endereco")
-        private long id_endereco;
+        @Column(name = "cep", nullable = false)
+        private String cep;
+        @Column(name = "tipo", nullable = false)
+        private String tipoUsuario;
+        
+
         public User() {
+            super();
         }
-        public User(DadosCadastroUsuario dados){
-            this.cpf = dados.cpf();
-            this.nome = dados.nome();
-        }
+
     }
