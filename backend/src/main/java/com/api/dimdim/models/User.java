@@ -18,7 +18,7 @@
     @Setter
     @Entity
     @Table(name = "pf_user")
-    public class PfUser {
+    public class User {
         
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,9 +31,11 @@
         private String genero;
         @Column(name = "data_nascimento")
         private Date dataNascimento;
-        public PfUser() {
+        @Column(name = "id_endereco")
+        private long id_endereco;
+        public User() {
         }
-        public PfUser(DadosCadastroUsuario dados){
+        public User(DadosCadastroUsuario dados){
             this.cpf = dados.cpf();
             this.nome = dados.nome();
         }

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-import com.api.dimdim.models.PfUser;
+import com.api.dimdim.models.User;
 import com.api.dimdim.repository.PfUserRepository;
 
 @RequestMapping("/user")
@@ -19,8 +19,8 @@ public class UserController {
 private PfUserRepository repositoryUser;
 
 @GetMapping("/findAll")
-public ResponseEntity<List<PfUser>> getAllUsers() {
-    List<PfUser> users = repositoryUser.findAllInSchema();
+public ResponseEntity<List<User>> getAllUsers() {
+    List<User> users = repositoryUser.findAllInSchema();
     return ResponseEntity.ok(users);
 }
 

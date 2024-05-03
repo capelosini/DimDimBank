@@ -25,7 +25,7 @@ public class Conta {
 
     @OneToOne
     @JoinColumn(name = "id")
-    private PfUser user;
+    private User user;
    
    
 }
