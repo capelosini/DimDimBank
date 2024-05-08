@@ -77,19 +77,34 @@ $("#extraInfoDiv").hide()
 
 setInterval(() => {
     console.log($("#cpfCnpj").val().length)
-    if ($("#cpfCnpj").val().length == 14){
+    if ($("#cpfCnpj").val().length == 18){
         $("#extraInfoDiv").slideDown()
     } else{
         $("#extraInfoDiv").slideUp()
     }
 }, 500)
 
+$("#cpfCnpj")[0].addEventListener("input", (e) => {
+    let cpf=e.target.value.replace(/\D/g,"")
+    if (cpf.length <= 11) {
+        cpf=cpf.replace(/(\d{3})(\d)/,"$1.$2")
+        cpf=cpf.replace(/(\d{3})(\d)/,"$1.$2")
+        cpf=cpf.replace(/(\d{3})(\d{1,2})$/,"$1-$2")
+    } else {
+        cpf=cpf.replace(/^(\d{2})(\d)/,"$1.$2")
+        cpf=cpf.replace(/^(\d{2})\.(\d{3})(\d)/,"$1.$2.$3")
+        cpf=cpf.replace(/\.(\d{3})(\d)/,".$1/$2")
+        cpf=cpf.replace(/(\d{4})(\d)/,"$1-$2")  
+    }
+    e.target.value=cpf
+})
+
 document.getElementById("cadastroForm").addEventListener("submit", e => {
     e.preventDefault()
     let cpfcnpj = document.getElementById("cpfCnpj").value
     let invalido = false
     // CPF
-    if (cpfcnpj.length == 11 || cpfcnpj.length == 14){
+    if (cpfcnpj.length == 14 || cpfcnpj.length == 18){
         invalido =  !(validarCPF(cpfcnpj) || validarCNPJ(cpfcnpj))
     } else{
         invalido=true
