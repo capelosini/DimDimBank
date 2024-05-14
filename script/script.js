@@ -76,7 +76,6 @@ function validarCNPJ(cnpj) {
 $("#extraInfoDiv").hide()
 
 setInterval(() => {
-    console.log($("#cpfCnpj").val().length)
     if ($("#cpfCnpj").val().length == 18){
         $("#extraInfoDiv").slideDown()
     } else{
@@ -99,7 +98,7 @@ $("#cpfCnpj")[0].addEventListener("input", (e) => {
     e.target.value=cpf
 })
 
-document.getElementById("cadastroForm").addEventListener("submit", e => {
+$("#cadastroForm, #loginForm").on("submit", e => {
     e.preventDefault()
     let cpfcnpj = document.getElementById("cpfCnpj").value
     let invalido = false
@@ -113,6 +112,6 @@ document.getElementById("cadastroForm").addEventListener("submit", e => {
     if (invalido){ 
         alert("CPF/CNPJ invalido!")
     } else{
-        document.getElementById("cadastroForm").submit()
+        $("#cadastroForm")[0].submit()
     }
 })
