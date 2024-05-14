@@ -101,7 +101,6 @@ $("#cpfCnpj")[0].addEventListener("input", (e) => {
 
 $("#cadastroForm, #loginForm").on("submit", e => {
     e.preventDefault()
-    console.log("a")
     let cpfcnpj = document.getElementById("cpfCnpj").value
     let invalido = false
     // CPF
@@ -116,4 +115,11 @@ $("#cadastroForm, #loginForm").on("submit", e => {
     } else{
         e.target.submit()
     }
+})
+
+$("#esqueceuInputs").hide()
+
+$(".toggleLoginInputs").on("click", (e) => {
+    $("#esqueceuInputs").toggle()
+    $("#loginInputs").toggle()
 })
