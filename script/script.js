@@ -2,6 +2,7 @@ function validarCPF(strCPF) {
     var Soma;
     var Resto;
     Soma = 0;
+    strCPF = strCPF.replace(/[^\d]+/g,'');
   if (strCPF == "00000000000") return false;
 
   for (i=1; i<=9; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (11 - i);
@@ -100,6 +101,7 @@ $("#cpfCnpj")[0].addEventListener("input", (e) => {
 
 $("#cadastroForm, #loginForm").on("submit", e => {
     e.preventDefault()
+    console.log("a")
     let cpfcnpj = document.getElementById("cpfCnpj").value
     let invalido = false
     // CPF
@@ -112,6 +114,6 @@ $("#cadastroForm, #loginForm").on("submit", e => {
     if (invalido){ 
         alert("CPF/CNPJ invalido!")
     } else{
-        $("#cadastroForm")[0].submit()
+        e.target.submit()
     }
 })
