@@ -1,0 +1,90 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body {
+    background: black;
+    scroll-behavior: smooth;
+}
+
+button {
+    cursor: pointer;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    background: black;
+    align-items: center;
+    width: 100%;
+    padding: 5px;
+}
+
+nav img {
+    width: 100px;
+    height: fit-content;
+}
+
+nav button {
+    margin: 0 5px;
+    padding: 6px 16px;
+    border-radius: 5px;
+    border: none;
+}
+
+main {
+    color: white;
+    text-align: center;
+    background: #131313;
+    margin-top: 70px;
+    padding: 40px 70px;
+    padding-top: 40vh;
+}
+
+main div {
+    padding-top: 50px;
+}
+main button {
+    font-size: 1.3em;
+    margin: 0 10px;
+    padding: 12px 30px;
+    border-radius: 5px;
+    transition: 0.2s ease;
+}
+main button:first-child {
+    background: white;
+    border: none;
+}
+main button:last-child {
+    background: none;
+    color: white;
+    border: solid 1px white;
+}
+main button:hover {
+    background: #8f8fff;
+}
+
+.services {
+    color: white;
+    text-align: center;
+    margin-top: 30px;
+    padding: 20px 50px;
+}
+.services > div {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+.card {
+    width: 300px;
+}
+.card img {
+    width: 100%;
+}
