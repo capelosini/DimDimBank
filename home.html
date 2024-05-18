@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link rel="stylesheet" href="css/home.css">
 </head>
+
 <body>
     <nav>
         <img src="imgs/logo.png" alt="logo">
@@ -15,46 +17,84 @@
         </div>
     </nav>
     <main>
-        <h1>Seu futuro financeiro é o nosso investimento. Abra as portas para a sua melhor vida com o <span>banco dimdim</span></h1>
+        <h1>Seu futuro financeiro é o nosso investimento. Abra as portas para a sua melhor vida com o <span>banco
+                dimdim</span></h1>
         <div>
             <button>Abra sua conta hoje</button>
-            <button>Explorar produtos</button>
+            <a href="#services"><button>Explorar produtos</button></a>
         </div>
     </main>
-    <section class="services">
+    <section id="services">
         <h2>Um banco que atende à todas suas necessidades</h2>
         <div>
             <div class="card">
                 <img src="imgs/poupança.jpg" alt="imagem">
                 <aside>
                     <h3>Contas correntes e poupança</h3>
-                    <p>Nossas contas oferecem flexibilidade e segurança para suas finanças diárias, com diversas opções de poupança para ajudá-lo a alcançar suas metas.</p>
+                    <p>Nossas contas oferecem flexibilidade e segurança para suas finanças diárias, com diversas opções
+                        de poupança para ajudá-lo a alcançar suas metas.</p>
                 </aside>
             </div>
             <div class="card">
                 <img src="imgs/empréstimo.jpg" alt="imagem">
                 <aside>
                     <h3>Empréstimos e financiamentos</h3>
-                    <p>Oferecemos uma variedade de opções de empréstimos e financiamentos com taxas competitivas e condições flexíveis.</p>
+                    <p>Oferecemos uma variedade de opções de empréstimos e financiamentos com taxas competitivas e
+                        condições flexíveis.</p>
                 </aside>
             </div>
             <div class="card">
                 <img src="imgs/cartões.jpg" alt="imagem">
                 <aside>
                     <h3>Cartões de crédito</h3>
-                    <p>Escolha entre nossos cartões de crédito, cada um com benefícios exclusivos e recompensas que se adaptam ao seu estilo de vida.</p>
+                    <p>Escolha entre nossos cartões de crédito, cada um com benefícios exclusivos e recompensas que se
+                        adaptam ao seu estilo de vida.</p>
                 </aside>
             </div>
-            <aside>
-                <div class="card">
-                    <img src="imgs/investimento.webp" alt="imagem">
+            <div class="card">
+                <img src="imgs/investimento.webp" alt="imagem">
+                <aside>
                     <h3>Investimentos</h3>
-                    <p>Explore nossas opções de investimentos, desde fundos de ações até planos de aposentadoria, para garantir um futuro financeiro seguro.</p>
-                </div>
-            </aside>
+                    <p>Explore nossas opções de investimentos, desde fundos de ações até planos de aposentadoria, para
+                        garantir um futuro financeiro seguro.</p>
+                </aside>
+            </div>
+        </div>
+    </section>
+    <section id="faq">
+        <img src="imgs/beto.png" alt="beto">
+        <div>
+            <h2>FAQ</h2>
+            <details>
+                <summary>Como faço para recuperar minha senha do banco digital?</summary>
+                <p>Para recuperar sua senha, basta acessar a opção "Esqueci minha senha" no aplicativo móvel ou no site. Você receberá instruções sobre como redefinir sua senha através do e-mail cadastrado ou de um código de verificação via SMS.</p>
+            </details>
+            <details>
+                <summary>Quais medidas de segurança o banco digital adota para proteger meus dados?</summary>
+                <p>Utilizamos tecnologias avançadas de segurança, como criptografia de ponta a ponta, autenticação de dois fatores e monitoramento constante para proteger suas informações pessoais e transações financeiras. Além disso, oferecemos recursos de segurança adicionais, como biometria e tokens de segurança.</p>
+            </details>
+            <details>
+                <summary>Quanto tempo leva para abrir uma conta em um banco digital?</summary>
+                <p>O processo de abertura de conta em um banco digital geralmente é rápido e pode levar apenas alguns minutos. Após enviar seus documentos e passar pela verificação de identidade, sua conta geralmente é aprovada em questão de horas.</p>
+            </details>
+            <details>
+                <summary>O banco digital oferece investimentos?</summary>
+                <p>Sim, muitos bancos digitais oferecem opções de investimentos, como CDBs, fundos de investimento, Tesouro Direto, entre outros. Você pode acessar esses investimentos diretamente pelo aplicativo ou pelo site e começar a investir de forma simples e segura.</p>
+            </details>
         </div>
     </section>
 
     <!--a sua segurança ṕe a nossa garantia-->
+    <script>
+        const navbar = document.querySelector("nav")
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 0) {
+                navbar.style.backgroundColor = "#30303080"
+            } else {
+                navbar.style.backgroundColor = "#000"
+            }
+        })
+    </script>
 </body>
+
 </html>
