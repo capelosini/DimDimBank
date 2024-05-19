@@ -10,22 +10,22 @@
 
 <body>
     <nav>
-        <img src="imgs/logo.png" alt="logo">
+        <img src="imgs/logo.png" alt="logo" class="logo">
         <div>
-            <button>Entrar</button>
-            <button>Cadastrar</button>
+            <a href="login.html"><button>Entrar</button></a>
+            <a href="cadastro.html"><button>Cadastrar</button></a>
         </div>
     </nav>
     <main>
         <h1>Seu futuro financeiro é o nosso investimento. Abra as portas para a sua melhor vida com o <span>banco
                 dimdim</span></h1>
         <div>
-            <button>Abra sua conta hoje</button>
+            <a href="cadastro.html"><button>Abra sua conta hoje</button></a>
             <a href="#services"><button>Explorar produtos</button></a>
         </div>
     </main>
     <section id="services">
-        <h2>Um banco que atende à todas suas necessidades</h2>
+        <h2>Um banco que atende a todas suas necessidades</h2>
         <div>
             <div class="card">
                 <img src="imgs/poupança.jpg" alt="imagem">
@@ -67,32 +67,59 @@
             <h2>FAQ</h2>
             <details>
                 <summary>Como faço para recuperar minha senha do banco digital?</summary>
-                <p>Para recuperar sua senha, basta acessar a opção "Esqueci minha senha" no aplicativo móvel ou no site. Você receberá instruções sobre como redefinir sua senha através do e-mail cadastrado ou de um código de verificação via SMS.</p>
+                <p>Para recuperar sua senha, basta acessar a opção "Esqueci minha senha" no aplicativo móvel ou no site.
+                    Você receberá instruções sobre como redefinir sua senha através do e-mail cadastrado ou de um código
+                    de verificação via SMS.</p>
             </details>
             <details>
                 <summary>Quais medidas de segurança o banco digital adota para proteger meus dados?</summary>
-                <p>Utilizamos tecnologias avançadas de segurança, como criptografia de ponta a ponta, autenticação de dois fatores e monitoramento constante para proteger suas informações pessoais e transações financeiras. Além disso, oferecemos recursos de segurança adicionais, como biometria e tokens de segurança.</p>
+                <p>Utilizamos tecnologias avançadas de segurança, como criptografia de ponta a ponta, autenticação de
+                    dois fatores e monitoramento constante para proteger suas informações pessoais e transações
+                    financeiras. Além disso, oferecemos recursos de segurança adicionais, como biometria e tokens de
+                    segurança.</p>
             </details>
             <details>
                 <summary>Quanto tempo leva para abrir uma conta em um banco digital?</summary>
-                <p>O processo de abertura de conta em um banco digital geralmente é rápido e pode levar apenas alguns minutos. Após enviar seus documentos e passar pela verificação de identidade, sua conta geralmente é aprovada em questão de horas.</p>
+                <p>O processo de abertura de conta em um banco digital geralmente é rápido e pode levar apenas alguns
+                    minutos. Após enviar seus documentos e passar pela verificação de identidade, sua conta geralmente é
+                    aprovada em questão de horas.</p>
             </details>
             <details>
                 <summary>O banco digital oferece investimentos?</summary>
-                <p>Sim, muitos bancos digitais oferecem opções de investimentos, como CDBs, fundos de investimento, Tesouro Direto, entre outros. Você pode acessar esses investimentos diretamente pelo aplicativo ou pelo site e começar a investir de forma simples e segura.</p>
+                <p>Sim, muitos bancos digitais oferecem opções de investimentos, como CDBs, fundos de investimento,
+                    Tesouro Direto, entre outros. Você pode acessar esses investimentos diretamente pelo aplicativo ou
+                    pelo site e começar a investir de forma simples e segura.</p>
             </details>
         </div>
     </section>
-
-    <!--a sua segurança ṕe a nossa garantia-->
+    <footer>
+        <div class="content">
+            <img src="imgs/logo.png" alt="Logo" class="logo">
+            <div class="info">
+                <h3>Entre em Contato</h3>
+                <p>Telefone: (XX) XXXX-XXXX</p>
+                <p>Email: contato@bancodimdim.com</p>
+            </div>
+            <div class="social-media">
+                <h3>Nossas Redes Sociais</h3>
+                <a href="#"><img src="imgs/facebook.svg" alt="Facebook"></a>
+                <a href="#"><img src="imgs/linkedin.webp" alt="Twitter"></a>
+                <a href="#"><img src="imgs/instagram.webp" alt="Instagram"></a>
+                <a href="https://github.com/capelosini/DimDimBank"><img src="imgs/github.svg" alt="github"></a>
+            </div>
+        </div>
+        <p>© 2024 Banco DimDim. Todos os direitos reservados.</p>
+    </footer>
     <script>
-        const navbar = document.querySelector("nav")
-        window.addEventListener("scroll", () => {
-            if (window.scrollY > 0) {
-                navbar.style.backgroundColor = "#30303080"
-            } else {
-                navbar.style.backgroundColor = "#000"
-            }
+        const details = document.querySelectorAll("details")
+        details.forEach(detail => {
+            detail.addEventListener("click", () => {
+                details.forEach(otherDetail => {
+                    if (otherDetail != detail && otherDetail.open) {
+                        otherDetail.removeAttribute('open')
+                    }
+                })
+            })
         })
     </script>
 </body>

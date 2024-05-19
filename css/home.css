@@ -10,7 +10,7 @@ html {
 }
 
 body {
-    background: black;
+    background-image: url("../imgs/bg4.png");
 }
 
 button {
@@ -22,8 +22,8 @@ nav {
     top: 0;
     display: flex;
     justify-content: space-between;
-    background: black;
-    backdrop-filter: blur(1px);
+    background: #30303090;
+    backdrop-filter: blur(2px);
     align-items: center;
     width: 100%;
     padding: 5px;
@@ -31,12 +31,14 @@ nav {
     z-index: 1;
 }
 
-nav img {
+.logo {
     width: 100px;
     height: fit-content;
 }
 
 nav button {
+    background-color: #7dd5f6;
+    color: #000;
     margin: 0 5px;
     padding: 6px 16px;
     border-radius: 5px;
@@ -93,7 +95,6 @@ section h2 {
 }
 
 #services {
-    background-image: url("../imgs/bg4.png");
     background-size: cover;
     color: white;
     text-align: center;
@@ -113,6 +114,7 @@ section h2 {
     width: 550px;
     border-radius: 15px;
     overflow: hidden;
+    transition: 0.2S ease;
 }
 
 .card img {
@@ -122,7 +124,11 @@ section h2 {
     transition: 0.3s ease-in-out;
 }
 
-.card img:hover {
+.card:hover {
+    background: #292929;
+}
+
+.card:hover img {
     transform: scale(1.05);
 }
 
@@ -145,39 +151,79 @@ section h2 {
     background: white;
     min-height: 100vh;
 }
-
 #faq img {
     position: absolute;
     bottom: 0;
     right: 0;
     width: 400px;
 }
-
 #faq div {
+    position: relative;
     width: 60%;
 }
-
 #faq h2 {
     font-size: 4em;
     font-weight: bolder;
 }
 
 #faq summary {
-    list-style: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 15px;
     font-weight: bold;
-
+    cursor: pointer;
+    background-color: linear-gradient(45deg, #92d6e7, #456fe4);
+    border-radius: 5px 5px 0 0;
+    transition: 0.3s ease
+}
+#faq summary:hover {
+    background-color: #33a6c9;
 }
 #faq details {
-    background-color: #e792e7;
-    background-image: linear-gradient(45deg, #e792e7 0%, #6eb7f1 100%);
+    background-image: linear-gradient(45deg, #92d6e7, #456fe4);
     margin: 20px 0;
     border-radius: 5px;
-  }
+    box-shadow: 0 4px 8px #0000001a;
+    transition: transform 0.3s ease;
+}
+#faq details[open] {
+    transform: scale(1.01);
+}
+#faq details[open] summary {
+    border-radius: 5px 5px 0 0;
+    background-color: #33a6c9;
+}
+#faq details p {
+    padding: 15px;
+    background-color: #33a6c9;
+    border-radius: 0 0 5px 5px;
+}
 
+footer {
+    background-color: #141414;
+    color: #fff;
+    padding: 30px;
+    font-family: Arial, sans-serif;
+}
+.content {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: 30px;
+    padding: 30px;
+}
+.content h3 {
+    margin-bottom: 10px;
+}
+.social-media img {
+    width: 30px;
+    margin-right: 15px;
+}
+footer > p {
+    margin-top: 50px;
+    text-align: center;
+}
 
 @media screen and (max-width: 1200px) {
     .card {
@@ -185,7 +231,7 @@ section h2 {
     }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 700px) {
     main {
         padding-top: 40vh;
     }
@@ -196,5 +242,17 @@ section h2 {
 
     .card img {
         height: 400px;
+    }
+
+    #faq img {
+        width: 350px;
+    }
+
+    #faq div {
+        width: 80%;
+    }
+
+    .content {
+        flex-direction: column;
     }
 }
