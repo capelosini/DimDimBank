@@ -74,15 +74,12 @@ function validarCNPJ(cnpj) {
     
 }
 
-$("#extraInfoDiv").hide()
+let user=new User()
+user.init()
+console.log(user.getAllUsers(), user.getLocalUser())
+if(user.isLogged()){ window.location.href="dashboard.html" }
 
-setInterval(() => {
-    if ($("#cpfCnpj").val().length == 18){
-        $("#extraInfoDiv").slideDown()
-    } else{
-        $("#extraInfoDiv").slideUp()
-    }
-}, 500)
+$("#extraInfoDiv").hide()
 
 $("#cpfCnpj")[0].addEventListener("input", (e) => {
     let cpf=e.target.value.replace(/\D/g,"")
@@ -97,11 +94,21 @@ $("#cpfCnpj")[0].addEventListener("input", (e) => {
         cpf=cpf.replace(/(\d{4})(\d)/,"$1-$2")  
     }
     e.target.value=cpf
+
+    if ($("#loginForm").length == 0){
+        if ($("#cpfCnpj").val().length == 18){
+            $("#extraInfoDiv").slideDown()
+            $("#cadastroForm .conditionalRequired").attr("required", "")
+        } else{
+            $("#extraInfoDiv").slideUp()
+            $("#cadastroForm .conditionalRequired").removeAttr("required")
+        }
+    }
 })
 
 $("#cadastroForm, #loginForm").on("submit", e => {
     e.preventDefault()
-    let cpfcnpj = document.getElementById("cpfCnpj").value
+    let cpfcnpj = $("#cpfCnpj").val()
     let invalido = false
     // CPF
     if (cpfcnpj.length == 14 || cpfcnpj.length == 18){
@@ -112,9 +119,17 @@ $("#cadastroForm, #loginForm").on("submit", e => {
 
     if (invalido){ 
         alert("CPF/CNPJ invalido!")
-    } else{
-        e.target.submit()
+        return
     }
+    if (e.target.id == "loginForm"){
+        if (!user.login(cpfcnpj, $("#password").val())){
+            alert("Este usuário não existe, verifique os dados e tente novamente!")
+            return
+        }
+    } else if(e.target.id == "cadastroForm"){
+        user.addUser({"cpfcnpj": cpfcnpj, "password": $("#password").val()})
+    } else{ return }
+    e.target.submit()
     // cadastro
     // localStorage.setItem("users", JSON.stringify({"name": "SLA", "cpf/cnpj": "2242242424"}))
     // login
@@ -127,4 +142,14 @@ $("#esqueceuInputs").hide()
 $(".toggleLoginInputs").on("click", (e) => {
     $("#esqueceuInputs").toggle()
     $("#loginInputs").toggle()
+
+
+    console.log($("#loginInputs").is(":hidden"))
+    if($("#loginInputs").is(":hidden")){
+        $("#loginInputs .conditionalRequired").removeAttr("required")
+        $("#esqueceuInputs .conditionalRequired").attr("required", "")
+    } else{
+        $("#esqueceuInputs .conditionalRequired").removeAttr("required")
+        $("#loginInputs .conditionalRequired").attr("required", "")
+    }
 })

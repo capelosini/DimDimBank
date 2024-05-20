@@ -13,7 +13,7 @@
     <nav>
         <img class="navLogo" src="imgs/logo.png" alt="">
     </nav>
-    <form id="cadastroForm" action="home.html" method="GET">
+    <form id="cadastroForm" action="login.html" method="GET">
         <!-- <label>Nome: </label> -->
         <input type="text" placeholder="Nome" required>
         <br>
@@ -27,15 +27,15 @@
         <input type="date" required>
         <br>
         <!-- <label>Senha: </label> -->
-        <input type="password" placeholder="Senha" required>
+        <input type="password" placeholder="Senha" id="password" required>
         <div id="extraInfoDiv">
-            <input type="text" placeholder="Responsável" required>
+            <input type="text" placeholder="Responsável" class="conditionalRequired">
             <br>
-            <input type="text" placeholder="Nome Fantasia" required>
+            <input type="text" placeholder="Nome Fantasia" class="conditionalRequired">
             <br>
-            <input type="text" placeholder="CEP" required>
+            <input type="text" placeholder="CEP" class="conditionalRequired">
             <br>
-            <input type="text" placeholder="Razão Social" required>
+            <input type="text" placeholder="Razão Social" class="conditionalRequired">
             <br>
         </div>
         <br>
@@ -45,6 +45,7 @@
         <br>
         <button type="submit">Cadastrar</button>
     </form>
+    <script src="script/User.js"></script>
     <script src="script/script.js"></script>
 </body>
 </html>

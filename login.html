@@ -13,13 +13,13 @@
     <nav>
         <img class="navLogo" src="imgs/logo.png" alt="">
     </nav>
-    <form id="loginForm" action="home.html" method="GET">
+    <form id="loginForm" action="dashboard.html" method="GET">
         <img src="imgs/profile.png" alt="">
         <br>
         <div id="loginInputs">
-            <input placeholder="CPF/CNPJ" type="text" maxlength="18" id="cpfCnpj" required>
+            <input class="conditionalRequired" placeholder="CPF/CNPJ" type="text" maxlength="18" id="cpfCnpj" required>
             <br>
-            <input placeholder="Senha" type="password" required>
+            <input class="conditionalRequired" placeholder="Senha" type="password" id="password" required>
             <br>
             <div class="links">
                 <a class="toggleLoginInputs">Esqueceu sua senha?</a>
@@ -30,9 +30,9 @@
         </div>
         
         <div id="esqueceuInputs">
-            <input placeholder="Email" type="email" required>
+            <input placeholder="Email" type="email" class="conditionalRequired">
             <br>
-            <input placeholder="Nova Senha" type="password" required>
+            <input placeholder="Nova Senha" type="password" class="conditionalRequired">
             <br>
             <div class="links">
                 <a class="toggleLoginInputs">Voltar</a>
@@ -41,6 +41,7 @@
             <button type="button" onclick="alert('Verifique o seu email para os proximos passos')">Confirmar</button>
         </div>
     </form>
+    <script src="script/User.js"></script>
     <script src="script/script.js"></script>
 </body>
 </html>
