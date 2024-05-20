@@ -65,7 +65,6 @@
             text-decoration: none;
             color: #000;
             font-size: 1.2rem;
-            transition: color 0.3s ease;
         }
 
         button {
@@ -77,12 +76,12 @@
             border-radius: 5px;
             border: none;
             cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            transition: background-color 0.7s ease, color 0.7s ease;
         }
 
         button:hover {
             
-            background-color: #ffcc00;
+            background-color: #2f91b4;
             color: #000;
         }
 
