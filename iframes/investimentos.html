@@ -136,8 +136,6 @@
                 event.preventDefault();
                 var investmentType = $('#investmentType').val();
                 var investmentValue = $('#investmentValue').val();
-                // Aqui você pode processar os dados e gerar o gráfico de acordo com o tipo de investimento selecionado
-                // Por enquanto, vamos apenas gerar dados aleatórios para demonstração
                 var chartData = {
                     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
                     datasets: [{
@@ -150,6 +148,11 @@
                     }]
                 };
                 updateChart(chartData);
+            });
+            
+            $('#investmentType').change(function () {
+
+                $('#investmentForm').trigger('submit');
             });
         });
     </script>
