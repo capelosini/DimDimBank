@@ -20,7 +20,7 @@
             font-family: 'Poppins', sans-serif;
         }
         
-        form#paymentForm, form#investmentForm {
+        form#investmentForm {
             text-align: center;
             width: 350px;
             margin: 150px auto 0 auto;
@@ -30,7 +30,7 @@
             box-shadow: #000 0 0 20px;
         }
         
-        form#paymentForm input, form#investmentForm input {
+        form#investmentForm input {
             background-color: #040404;
             border: none;
             border-radius: 5px;
@@ -42,7 +42,7 @@
             width: 100%;
         }
         
-        form#paymentForm button, form#investmentForm button {
+        form#investmentForm button {
             width: 80%;
             margin: 10px 0 0 0;
             background-color: #7dd5f6;
@@ -59,27 +59,15 @@
             box-shadow: #000 0 0 10px;
         }
         
-        .payment-method {
-            margin: 10px 0;
-            text-align: left;
-        }
-        
-        .payment-method label {
-            margin-right: 20px;
-            cursor: pointer;
-        }
-        
-        #creditCardInputs {
-            display: block; 
-        }
-        
-        iframe {
-            display: none;
+        #investmentChartContainer {
             width: 100%;
-            height: 80vh; 
-            border: none;
+            max-width: 600px;
+            margin-top: 50px;
         }
         
+        #investmentChart {
+            width: 100%;
+        }
     </style>
 </head>
 <body class="investment">
@@ -87,21 +75,27 @@
         <img src="../imgs/profile.png" alt="User Profile Image">
         <br>
         <div id="investmentInputs">
-            <input placeholder="Nome do Investimento" type="text" required>
+            <select id="investmentType" required>
+                <option value="" disabled selected>Escolha o tipo de investimento</option>
+                <option value="acoes">Ações</option>
+                <option value="fundos">Fundos de Investimento</option>
+                <option value="cripto">Criptomoedas</option>
+            </select>
             <br>
             <input placeholder="Valor do Investimento" type="text" id="investmentValue" required>
             <br>
             <button type="submit">Investir</button>
         </div>
     </form>
-    <canvas id="investmentChart" width="400" height="200"></canvas>
+    <div id="investmentChartContainer">
+        <canvas id="investmentChart"></canvas>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/cleave.js@1.6.0/dist/cleave.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Apply Cleave.js to the currency input
             new Cleave('#investmentValue', {
                 numeral: true,
                 numeralThousandsGroupStyle: 'thousand',
@@ -109,8 +103,9 @@
                 noImmediatePrefix: true,
                 rawValueTrimPrefix: true
             });
-        
-            // Generate random data for the chart
+            
+            var investmentChart;
+            
             function generateRandomData(points, min, max) {
                 let data = [];
                 for (let i = 0; i < points; i++) {
@@ -118,12 +113,32 @@
                 }
                 return data;
             }
-        
-            // Set up the chart
-            var ctx = document.getElementById('investmentChart').getContext('2d');
-            var investmentChart = new Chart(ctx, {
-                type: 'line',
-                data: {
+            
+            function updateChart(data) {
+                if (investmentChart) {
+                    investmentChart.destroy();
+                }
+                var ctx = document.getElementById('investmentChart').getContext('2d');
+                investmentChart = new Chart(ctx, {
+                    type: 'line',
+                    data: data,
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }
+            
+            $('#investmentForm').submit(function (event) {
+                event.preventDefault();
+                var investmentType = $('#investmentType').val();
+                var investmentValue = $('#investmentValue').val();
+                // Aqui você pode processar os dados e gerar o gráfico de acordo com o tipo de investimento selecionado
+                // Por enquanto, vamos apenas gerar dados aleatórios para demonstração
+                var chartData = {
                     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
                     datasets: [{
                         label: 'Investment Performance',
@@ -133,17 +148,10 @@
                         borderWidth: 1,
                         fill: true
                     }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
+                };
+                updateChart(chartData);
             });
         });
-        
     </script>
 </body>
 </html>
