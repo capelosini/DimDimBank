@@ -115,6 +115,11 @@ $("#cadastroForm, #loginForm").on("submit", e => {
     } else{
         e.target.submit()
     }
+    // cadastro
+    // localStorage.setItem("users", JSON.stringify({"name": "SLA", "cpf/cnpj": "2242242424"}))
+    // login
+    // USERS LIKE OBJECT = [ { "name": "sla", "password": "sla" } ]
+    // if (JSON.parse(localStorage.getItem("users"))["cpf/cnpj"] == loginCnpj && senha)
 })
 
 $("#esqueceuInputs").hide()
