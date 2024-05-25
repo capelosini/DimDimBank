@@ -1,26 +1,29 @@
+// deno-lint-ignore-file
 let user = new User()
 user.init()
-let localUser=user.getLocalUser()
+let localUser = user.getLocalUser()
 
 // PAGAMENTO
-if ($("#paymentForm").length > 0){
+if ($("#paymentForm").length > 0) {
     document.getElementById("paymentForm").addEventListener("submit", (e) => {
         e.preventDefault()
         let value = Number(document.getElementById("valor").value.replace("-", "").replace("R$ ", "").replace(",", ""))
-        if (!document.getElementById("creditOption").checked){
-            if (localUser.money >= value && value != 0){
-                localUser.money-=value
-                localUser.extrato.push({"value": -value, "desc": "PIX"})
+        if (!document.getElementById("creditOption").checked) {
+            if (localUser.money >= value && value != 0) {
+                localUser.money -= value
+                localUser.extrato.push({ "value": -value, "desc": "PIX" })
                 user.saveCurrentUser(localUser)
+                generateReceipt("PIX", value)
                 window.close()
-            } else{
+            } else {
                 alert("Você não possui este dinheiro!")
             }
-        } else{
-            if (value != 0){
-                localUser.extrato.push({"value": -value, "desc": "Crédito"})
+        } else {
+            if (value != 0) {
+                localUser.extrato.push({ "value": -value, "desc": "Crédito" })
                 user.saveCurrentUser(localUser)
-            } else{
+                generateReceipt("Crédito", value)
+            } else {
                 alert("Coloque um valor válido!")
             }
             window.close()
@@ -45,9 +48,10 @@ if ($("#paymentForm").length > 0){
         noImmediatePrefix: true,
         rawValueTrimPrefix: true
     });
-} 
+}
+
 // INVESTIMENTO
-else if($("#investmentForm").length > 0){
+else if ($("#investmentForm").length > 0) {
     $("#investmentForm").on("submit", e => {
         e.preventDefault()
         var investmentType = $('#investmentType').val();
@@ -67,16 +71,16 @@ else if($("#investmentForm").length > 0){
     })
     $("#btnSubmit").on("click", e => {
         let value = Number(document.getElementById("investmentValue").value.replace("-", "").replace("R$ ", "").replace(",", ""))
-        if (localUser.money >= value && value != 0){
-            localUser.money-=value
-            localUser.extrato.push({"value": -value, "desc": $("#investmentType").val()})
+        if (localUser.money >= value && value != 0) {
+            localUser.money -= value
+            localUser.extrato.push({ "value": -value, "desc": $("#investmentType").val() })
             user.saveCurrentUser(localUser)
             window.close()
-        } else{
+        } else {
             alert("Você não possui este dinheiro para investir!")
         }
     })
-    
+
     new Cleave('#investmentValue', {
         numeral: true,
         numeralThousandsGroupStyle: 'thousand',
@@ -84,9 +88,9 @@ else if($("#investmentForm").length > 0){
         noImmediatePrefix: true,
         rawValueTrimPrefix: true
     });
-    
+
     var investmentChart;
-    
+
     function generateRandomData(points, min, max) {
         let data = [];
         for (let i = 0; i < points; i++) {
@@ -94,7 +98,7 @@ else if($("#investmentForm").length > 0){
         }
         return data;
     }
-    
+
     function updateChart(data) {
         if (investmentChart) {
             investmentChart.destroy();
@@ -112,9 +116,34 @@ else if($("#investmentForm").length > 0){
             }
         });
     }
-    
+
     $('#investmentType').change(function () {
-    
+
         $('#investmentForm').trigger('submit');
     });
+}
+//GERADOR DE COMPROVANTE
+function generateReceipt(paymentMethod, value) {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+   
+    doc.setFontSize(22);
+    doc.text("Comprovante de Pagamento", 105, 20, null, null, "center");
+
+ 
+    doc.setFontSize(16);
+    doc.text(`Método de Pagamento: ${paymentMethod}`, 20, 40);
+    doc.text(`Valor: R$ ${value.toFixed(2)}`, 20, 50);
+
+
+    doc.text(`Data: ${new Date().toLocaleString()}`, 20, 60);
+
+    doc.setLineWidth(0.5);
+    doc.rect(10, 30, 190, 40);
+
+    doc.setFontSize(12);
+    doc.text("Obrigado por utilizar nossos serviços!", 105, 80, null, null, "center");
+
+    doc.save("comprovante.pdf");
 }
