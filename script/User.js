@@ -32,6 +32,18 @@ class User{
         return false
     }
 
+    saveCurrentUser(user){
+        let users=this.getAllUsers()
+        users=users.map(u => {
+            if (u.cpfcnpj == user.cpfcnpj && u.password == user.password){
+                return user
+            } else{
+                return u
+            }
+        })
+        localStorage.setItem("users", btoa(JSON.stringify(users)))
+    }
+
     login(cpfcnpj, password){
         let users=this.getAllUsers()
         for(let i=0; i<users.length; i++){

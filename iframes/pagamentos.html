@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="iframe.css">
     <title>Pagamento</title>
 </head>
 <body class="payment">
@@ -20,7 +20,7 @@
             <br>
             <div class="payment-method">
                 <label>
-                    <input type="radio" name="paymentMethod" value="credit" checked>
+                    <input type="radio" name="paymentMethod" value="credit" id="creditOption" checked>
                     Cartão de Crédito
                 </label>
                 <label>
@@ -42,31 +42,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/cleave.js@1.6.0/dist/cleave.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const paymentMethodInputs = document.querySelectorAll('input[name="paymentMethod"]');
-            const creditCardInputs = document.getElementById('creditCardInputs');
-        
-            paymentMethodInputs.forEach(input => {
-                input.addEventListener('change', function () {
-                    if (this.value === 'credit') {
-                        creditCardInputs.style.display = 'block';
-                    } else {
-                        creditCardInputs.style.display = 'none';
-                    }
-                });
-            });
-        
-      
-            new Cleave('#valor', {
-                numeral: true,
-                numeralThousandsGroupStyle: 'thousand',
-                prefix: 'R$ ',
-                noImmediatePrefix: true,
-                rawValueTrimPrefix: true
-            });
-        });
-            
-    </script>
+    <script src="../script/User.js"></script>
+    <script src="iframe.js"></script>
 </body>
 </html>

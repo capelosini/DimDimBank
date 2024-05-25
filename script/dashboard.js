@@ -1,5 +1,13 @@
 let user = new User()
 user.init()
+if(!user.isLogged()){ window.location.href="login.html" }
+let localUser = user.getLocalUser()
+
+console.log(localUser.extrato)
+
+// INFO TO UI
+document.getElementById("userName").innerText = localUser.name
+document.getElementById("userMoney").innerText = "R$ "+(localUser.money.toFixed(2))
 
 function openWindow(title, filepath){
     var popupWidth = 600;
@@ -10,18 +18,12 @@ function openWindow(title, filepath){
 }
 
 document.getElementById('pagamentosButton').addEventListener('click', function() {
-    // var popupWidth = 600;
-    // var popupHeight = 700;
-    // var left = (screen.width - popupWidth) / 2;
-    // var top = (screen.height - popupHeight) / 2;
-    // window.open('../iframes/pagamentos.html', 'Pagamento', 'width=' + popupWidth + ',height=' + popupHeight + ',top=' + top + ',left=' + left);
     openWindow('Pagamento', '../iframes/pagamentos.html')
 });
 document.getElementById('investimentosButton').addEventListener('click', function() {
-    // var popupWidth = 600;
-    // var popupHeight = 700;
-    // var left = (screen.width - popupWidth) / 2;
-    // var top = (screen.height - popupHeight) / 2;
-    // window.open('../iframes/investimentos.html', 'Investimento', 'width=' + popupWidth + ',height=' + popupHeight + ',top=' + top + ',left=' + left);
     openWindow('Investimento', '../iframes/investimentos.html')
+});
+
+document.getElementById('extratoButton').addEventListener('click', function() {
+    openWindow('Extrato', '../iframes/extrato.html')
 });
