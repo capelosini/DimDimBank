@@ -8,7 +8,7 @@ if ($("#paymentForm").length > 0){
         e.preventDefault()
         let value = Number(document.getElementById("valor").value.replace("-", "").replace("R$ ", "").replace(",", ""))
         if (!document.getElementById("creditOption").checked){
-            if (localUser.money >= value){
+            if (localUser.money >= value && value != 0){
                 localUser.money-=value
                 localUser.extrato.push({"value": -value, "desc": "PIX"})
                 user.saveCurrentUser(localUser)
@@ -17,8 +17,12 @@ if ($("#paymentForm").length > 0){
                 alert("Você não possui este dinheiro!")
             }
         } else{
-            localUser.extrato.push({"value": -value, "desc": "Crédito"})
-            user.saveCurrentUser(localUser)
+            if (value != 0){
+                localUser.extrato.push({"value": -value, "desc": "Crédito"})
+                user.saveCurrentUser(localUser)
+            } else{
+                alert("Coloque um valor válido!")
+            }
             window.close()
         }
     })
@@ -63,7 +67,7 @@ else if($("#investmentForm").length > 0){
     })
     $("#btnSubmit").on("click", e => {
         let value = Number(document.getElementById("investmentValue").value.replace("-", "").replace("R$ ", "").replace(",", ""))
-        if (localUser.money >= value){
+        if (localUser.money >= value && value != 0){
             localUser.money-=value
             localUser.extrato.push({"value": -value, "desc": $("#investmentType").val()})
             user.saveCurrentUser(localUser)
