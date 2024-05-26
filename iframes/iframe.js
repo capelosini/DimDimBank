@@ -13,8 +13,9 @@ if ($("#paymentForm").length > 0) {
                 localUser.money -= value
                 localUser.extrato.push({ "value": -value, "desc": "PIX" })
                 user.saveCurrentUser(localUser)
-                generateReceipt("PIX", value)
-                window.close()
+                //generateReceipt("PIX", value)
+                document.body.innerHTML="<h1>Pagamento realizado com sucesso!</h1><p>Pode fechar esta janela se quiser</p><button onclick='generateReceipt(\"PIX\", "+value+")' class='btn btn-outline-success'>Baixar Recibo</button>"
+                //window.close()
             } else {
                 alert("Você não possui este dinheiro!")
             }
@@ -22,11 +23,12 @@ if ($("#paymentForm").length > 0) {
             if (value != 0) {
                 localUser.extrato.push({ "value": -value, "desc": "Crédito" })
                 user.saveCurrentUser(localUser)
-                generateReceipt("Crédito", value)
+                //generateReceipt("Crédito", value)
+                document.body.innerHTML="<h1>Pagamento realizado com sucesso!</h1><p>Pode fechar esta janela se quiser</p><button onclick='generateReceipt(\"Crédito\", "+value+")' class='btn btn-outline-success'>Baixar Recibo</button>"
             } else {
                 alert("Coloque um valor válido!")
             }
-            window.close()
+            //window.close()
         }
     })
 
@@ -54,8 +56,8 @@ if ($("#paymentForm").length > 0) {
 else if ($("#investmentForm").length > 0) {
     $("#investmentForm").on("submit", e => {
         e.preventDefault()
-        var investmentType = $('#investmentType').val();
-        var investmentValue = $('#investmentValue').val();
+        //var investmentType = $('#investmentType').val();
+        //var investmentValue = $('#investmentValue').val();
         var chartData = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [{
@@ -127,7 +129,10 @@ function generateReceipt(paymentMethod, value) {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
 
-   
+    let logo = new Image()
+    logo.src = "../imgs/logo.png"
+    doc.addImage(logo, "PNG", 5, 5, 35, 20)
+
     doc.setFontSize(22);
     doc.text("Comprovante de Pagamento", 105, 20, null, null, "center");
 
@@ -135,7 +140,6 @@ function generateReceipt(paymentMethod, value) {
     doc.setFontSize(16);
     doc.text(`Método de Pagamento: ${paymentMethod}`, 20, 40);
     doc.text(`Valor: R$ ${value.toFixed(2)}`, 20, 50);
-
 
     doc.text(`Data: ${new Date().toLocaleString()}`, 20, 60);
 
@@ -145,5 +149,8 @@ function generateReceipt(paymentMethod, value) {
     doc.setFontSize(12);
     doc.text("Obrigado por utilizar nossos serviços!", 105, 80, null, null, "center");
 
-    doc.save("comprovante.pdf");
+    let date=new Date()
+    let datetime = date.getDate() + "_" + (date.getMonth()+1)  + "_" + date.getFullYear() + "@"  + date.getHours() + "_"  + date.getMinutes() + "_" + date.getSeconds();
+
+    doc.save("comprovante"+datetime+".pdf");
 }
