@@ -46,20 +46,31 @@ nav button {
 }
 
 main {
+    background-image: url("../imgs/cidade.jpg");
+    background-size: cover;
     color: white;
     text-align: center;
-    background: #131313;
     max-width: 1400px;
     margin: auto;
     margin-top: 70px;
     padding: 40px 70px;
     padding-top: 50vh;
 }
-
+main::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: #00000080;
+}
+main * {
+    position: relative;
+}
 main div {
     margin-top: 50px;
 }
-
 main button {
     font-size: 1.3em;
     width: 250px;
@@ -67,19 +78,10 @@ main button {
     padding: 12px;
     border-radius: 5px;
     transition: 0.2s ease;
-}
-
-main button:first-child {
-    background: white;
-    border: none;
-}
-
-main button:last-child {
     background: none;
     color: white;
     border: solid 1px white;
 }
-
 main button:hover {
     background: #599bff;
 }
